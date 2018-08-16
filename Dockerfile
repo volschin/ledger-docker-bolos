@@ -13,7 +13,7 @@ ADD install_compiler.sh /tmp/install_compiler.sh
 RUN /tmp/install_compiler.sh
 
 # Install the SDKs
-RUN git clone https://github.com/LedgerHQ/blue-secure-sdk /opt/bolos/blue-secure-sdk
+RUN git clone https://github.com/hantuzun/blue-secure-sdk /opt/bolos/blue-secure-sdk
 RUN git clone https://github.com/LedgerHQ/nanos-secure-sdk /opt/bolos/nanos-secure-sdk
 
 # Volume
