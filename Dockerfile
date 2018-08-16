@@ -20,7 +20,8 @@ RUN git clone https://github.com/LedgerHQ/nanos-secure-sdk /opt/bolos/nanos-secu
 RUN echo "export BOLOS_SDK=/opt/bolos/blue-secure-sdk" >> ~/.bashrc
 
 # Install https://pypi.org/project/ledgerblue
-# RUN pip install -U setuptools ledgerblue
+RUN pip install -U setuptools
+# RUN pip install -U ledgerblue
 RUN git clone https://github.com/hantuzun/blue-loader-python /opt/bolos/blue-loader-python
 RUN python /opt/bolos/blue-loader-python/setup.py install
 
