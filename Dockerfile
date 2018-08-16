@@ -36,6 +36,7 @@ RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", 
 
 # Clone blue-sample-apps
 RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
+WORKDIR ~/blue-sample-apps
 
 # Install development tools
 RUN apt-get install -y usbutils tree
