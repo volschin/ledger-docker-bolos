@@ -42,4 +42,15 @@ WORKDIR ~/blue-sample-apps
 RUN apt-get install -y usbutils tree
 RUN apt-get install -y nano
 
+# Install python library dependencies
+RUN apt-get install -y build-essential && \
+    apt-get install -y automake && \
+    apt-get install -y pkg-config && \
+    apt-get install -y libtool && \
+    apt-get install -y libffi-dev && \
+    apt-get install -y libgmp-dev && \
+
+# Install python pip packages
+RUN pip install secp256k1
+
 RUN adduser -u 1000 test
