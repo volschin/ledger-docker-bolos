@@ -35,5 +35,6 @@ RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
 
 # Install development tools
 RUN apt-get install -y usbutils tree
+RUN apt-get install -y nano
 
 RUN adduser -u 1000 test
