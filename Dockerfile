@@ -26,10 +26,14 @@ RUN git clone https://github.com/hantuzun/blue-loader-python /opt/bolos/blue-loa
 RUN python /opt/bolos/blue-loader-python/setup.py install
 
 # Giving permissions on udev
-RUN SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"
-RUN SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"
+RUN touch /etc/udev/rules.d/bolos.rules
+RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
+RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
 
 # Clone blue-sample-apps
 RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
+
+# Install development tools
+RUN apt-get install -y usbutils tree
 
 RUN adduser -u 1000 test
