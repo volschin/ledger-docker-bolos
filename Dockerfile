@@ -28,5 +28,7 @@ RUN python /opt/bolos/blue-loader-python/setup.py install
 RUN SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"
 RUN SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"
 
+# Clone blue-sample-apps
+RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
 
 RUN adduser -u 1000 test
