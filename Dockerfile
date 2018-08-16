@@ -12,12 +12,13 @@ RUN apt-get update && \
 ADD install_compiler.sh /tmp/install_compiler.sh
 RUN /tmp/install_compiler.sh
 
+# Install the SDKs
+RUN git clone https://github.com/LedgerHQ/blue-secure-sdk /opt/bolos/blue-secure-sdk
+RUN git clone https://github.com/LedgerHQ/nanos-secure-sdk /opt/bolos/nanos-secure-sdk
+
+# Volume
+RUN echo "export BOLOS_SDK=/opt/bolos/blue-secure-sdk" >> ~/.bashrc
+
+# Install https://pypi.org/project/ledgerblue
 RUN pip install -U setuptools ledgerblue
 RUN adduser -u 1000 test
-
-#VOLUME
-RUN echo "export BOLOS_SDK=/opt/bolos/nanos-secure-sdk" >> ~/.bashrc
-
-# ENV
-
-# START SCRIPT
