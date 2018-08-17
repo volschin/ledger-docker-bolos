@@ -39,8 +39,6 @@ RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
 WORKDIR ~/blue-sample-apps
 
 # Install development tools
-RUN apt-get install -y usbutils tree
-RUN apt-get install -y nano
 
 # Install python library dependencies
 RUN apt-get install -y build-essential && \
@@ -49,6 +47,9 @@ RUN apt-get install -y build-essential && \
     apt-get install -y libtool && \
     apt-get install -y libffi-dev && \
     apt-get install -y libgmp-dev && \
+    apt-get install -y usbutils && \
+    apt-get install -y tree && \
+    apt-get install -y nano
 
 # Install python pip packages
 RUN pip install secp256k1
