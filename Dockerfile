@@ -19,14 +19,6 @@ RUN git clone https://github.com/LedgerHQ/nanos-secure-sdk /opt/bolos/nanos-secu
 # Volume
 RUN echo "export BOLOS_SDK=/opt/bolos/blue-secure-sdk" >> ~/.bashrc
 
-# Install https://pypi.org/project/ledgerblue
-RUN pip install -U setuptools
-RUN pip install -U secp256k1
-# RUN pip install -U ledgerblue
-RUN git clone https://github.com/hantuzun/blue-loader-python /opt/bolos/blue-loader-python
-WORKDIR /opt/bolos/blue-loader-python
-RUN python setup.py install
-
 RUN apt-get install -y build-essential && \
     apt-get install -y automake && \
     apt-get install -y pkg-config && \
@@ -36,6 +28,14 @@ RUN apt-get install -y build-essential && \
     apt-get install -y usbutils && \
     apt-get install -y tree && \
     apt-get install -y nano
+
+# Install https://pypi.org/project/ledgerblue
+RUN pip install -U setuptools
+RUN pip install secp256k1
+# RUN pip install -U ledgerblue
+RUN git clone https://github.com/hantuzun/blue-loader-python /opt/bolos/blue-loader-python
+WORKDIR /opt/bolos/blue-loader-python
+RUN python setup.py install
 
 # Clone blue-sample-apps
 RUN git clone https://github.com/hantuzun/blue-sample-apps /root/blue-sample-apps
