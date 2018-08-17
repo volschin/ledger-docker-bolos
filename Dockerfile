@@ -19,28 +19,14 @@ RUN git clone https://github.com/LedgerHQ/nanos-secure-sdk /opt/bolos/nanos-secu
 # Volume
 RUN echo "export BOLOS_SDK=/opt/bolos/blue-secure-sdk" >> ~/.bashrc
 
-# Install development tools
-RUN apt-get install -y usbutils tree
-
 # Install https://pypi.org/project/ledgerblue
 RUN pip install -U setuptools
+RUN pip install -U secp256k1
 # RUN pip install -U ledgerblue
 RUN git clone https://github.com/hantuzun/blue-loader-python /opt/bolos/blue-loader-python
 WORKDIR /opt/bolos/blue-loader-python
 RUN python setup.py install
 
-# Giving permissions on udev
-RUN touch /etc/udev/rules.d/bolos.rules
-RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
-RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
-
-# Clone blue-sample-apps
-RUN git clone https://github.com/hantuzun/blue-sample-apps ~/blue-sample-apps
-WORKDIR ~/blue-sample-apps
-
-# Install development tools
-
-# Install python library dependencies
 RUN apt-get install -y build-essential && \
     apt-get install -y automake && \
     apt-get install -y pkg-config && \
@@ -51,7 +37,13 @@ RUN apt-get install -y build-essential && \
     apt-get install -y tree && \
     apt-get install -y nano
 
-# Install python pip packages
-RUN pip install secp256k1
+# Clone blue-sample-apps
+RUN git clone https://github.com/hantuzun/blue-sample-apps /root/blue-sample-apps
+WORKDIR /root/blue-sample-apps
+
+# Giving permissions on udev
+RUN touch /etc/udev/rules.d/bolos.rules
+RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
+RUN echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="root"' >> /etc/udev/rules.d/bolos.rules
 
 RUN adduser -u 1000 test
