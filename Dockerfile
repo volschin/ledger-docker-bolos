@@ -38,7 +38,7 @@ WORKDIR /opt/bolos/blue-loader-python
 RUN python setup.py install
 
 # Clone blue-sample-apps
-RUN git clone https://github.com/hantuzun/blue-sample-apps /root/blue-sample-apps
+RUN git clone https://github.com/HardAgency/blue-sample-apps.git /root/blue-sample-apps
 WORKDIR /root/blue-sample-apps
 
 # Giving permissions on udev
